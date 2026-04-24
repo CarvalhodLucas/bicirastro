@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title data-i18n="page_title">Bici Rastro — Alquiler de Bicicletas en Valencia</title>
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Bici Rastro — Alquiler de Bicicletas en Valencia">
+  <meta name="description" content="Alquila tu bici, elige tu tour y descubre Valencia a tu ritmo — con reserva rápida directo por el chat.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://carvalhodlucas.github.io/bicirastro/">
+  <meta property="og:title" content="Bici Rastro — Alquiler de Bicicletas en Valencia">
+  <meta property="og:description" content="Alquila tu bici, elige tu tour y descubre Valencia a tu ritmo — con reserva rápida directo por el chat.">
+  <meta property="og:image" content="https://carvalhodlucas.github.io/bicirastro/assets/logo.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://carvalhodlucas.github.io/bicirastro/">
+  <meta property="twitter:title" content="Bici Rastro — Alquiler de Bicicletas en Valencia">
+  <meta property="twitter:description" content="Alquila tu bici, elige tu tour y descubre Valencia a tu ritmo — con reserva rápida directo por el chat.">
+  <meta property="twitter:image" content="https://carvalhodlucas.github.io/bicirastro/assets/logo.png">
+  <link rel="shortcut icon" href="assets/logo.png?v=2" type="image/png"/>
+  <link rel="icon" href="assets/logo.png?v=2" type="image/png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #FF6B1A;
+      --orange-light: #FF8C42;
+      --orange-pale: #FFF0E6;
+      --white: #FAFAF7;
+      --dark: #1A1208;
+      --brown: #3D2B1F;
+      --muted: #8C7B6E;
+      --border: rgba(255,107,26,0.15);
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--dark);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(250,250,247,0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 48px;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--dark);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-logo img {
+      height: 60px;
+      width: auto;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+    }
+    .nav-logo .dot { color: var(--orange); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 0.85rem; font-weight: 500;
+      color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--dark); }
+    .nav-langs { display: flex; gap: 8px; }
+    .lang-btn {
+      font-size: 0.75rem; font-weight: 600;
+      padding: 6px 12px; border-radius: 100px;
+      border: 1px solid var(--border);
+      background: transparent; cursor: pointer;
+      color: var(--muted); transition: all 0.2s;
+    }
+    .lang-btn.active, .lang-btn:hover {
+      background: var(--orange); color: white; border-color: var(--orange);
+    }
+    .nav-cta {
+      background: var(--dark); color: white;
+      font-weight: 600; font-size: 0.82rem;
+      padding: 10px 22px; border-radius: 100px;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .nav-cta:hover { background: var(--orange); transform: translateY(-1px); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 100px 48px 60px;
+      position: relative; overflow: hidden;
+      gap: 48px;
+    }
+
+    /* Decorative background */
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 70% 50%, rgba(255,107,26,0.06) 0%, transparent 70%),
+        radial-gradient(circle at 10% 90%, rgba(255,107,26,0.04) 0%, transparent 50%);
+    }
+    .hero-circle {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,107,26,0.08);
+      right: -100px; top: 50%;
+      transform: translateY(-50%);
+    }
+    .hero-circle-2 {
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,107,26,0.05);
+      right: 0px; top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .hero-content { position: relative; z-index: 2; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange-pale);
+      border: 1px solid rgba(255,107,26,0.2);
+      border-radius: 100px;
+      padding: 6px 16px; margin-bottom: 28px;
+      font-size: 0.75rem; font-weight: 600;
+      color: var(--orange); letter-spacing: 0.04em;
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero-badge .flag { font-size: 0.9rem; }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5vw, 5rem);
+      font-weight: 900; line-height: 1.0;
+      letter-spacing: -0.02em;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    h1 em {
+      font-style: italic; color: var(--orange);
+    }
+
+    .hero-sub {
+      margin-top: 20px;
+      font-size: 1rem; color: var(--muted);
+      line-height: 1.7; font-weight: 300;
+      max-width: 420px;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .hero-actions {
+      margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+    .btn-primary {
+      background: var(--orange); color: white;
+      font-weight: 600; font-size: 0.9rem;
+      padding: 14px 28px; border-radius: 100px;
+      text-decoration: none; transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+      border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255,107,26,0.25); }
+    .btn-outline {
+      background: transparent; color: var(--dark);
+      font-weight: 600; font-size: 0.9rem;
+      padding: 14px 28px; border-radius: 100px;
+      text-decoration: none; transition: all 0.2s;
+      border: 1.5px solid rgba(26,18,8,0.15);
+      display: inline-flex; align-items: center; gap: 8px;
+      cursor: pointer;
+    }
+    .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
+
+    .hero-stats {
+      margin-top: 48px; display: flex; gap: 36px;
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.2rem; font-weight: 900; line-height: 1;
+      color: var(--dark);
+    }
+    .stat-num span { color: var(--orange); }
+    .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+
+    /* Hero visual */
+    .hero-visual {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+    .hero-card {
+      background: white;
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 32px 80px rgba(26,18,8,0.1), 0 0 0 1px rgba(26,18,8,0.05);
+      width: 100%; max-width: 420px;
+      position: relative;
+    }
+    .hero-card-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,107,26,0.08);
+      border-radius: 100px; padding: 4px 12px;
+      font-size: 0.72rem; font-weight: 600; color: var(--orange);
+      margin-bottom: 20px;
+    }
+    .bike-list { display: flex; flex-direction: column; gap: 12px; }
+    .bike-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px; border-radius: 12px;
+      border: 1px solid rgba(26,18,8,0.06);
+      transition: all 0.2s; cursor: pointer;
+    }
+    .bike-item:hover { border-color: var(--orange); background: var(--orange-pale); }
+    .bike-item.featured { background: var(--orange); border-color: var(--orange); }
+    .bike-info { display: flex; align-items: center; gap: 12px; }
+    .bike-icon { font-size: 1.4rem; }
+    .bike-name { font-weight: 600; font-size: 0.88rem; color: var(--dark); }
+    .bike-item.featured .bike-name { color: white; }
+    .bike-detail { font-size: 0.74rem; color: var(--muted); margin-top: 2px; }
+    .bike-item.featured .bike-detail { color: rgba(255,255,255,0.7); }
+    .bike-price { font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--orange); }
+    .bike-item.featured .bike-price { color: white; }
+    .hero-card-footer {
+      margin-top: 20px; padding-top: 16px;
+      border-top: 1px solid rgba(26,18,8,0.06);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .avail-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; display: inline-block; margin-right: 6px; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+    .avail-text { font-size: 0.78rem; color: var(--muted); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* STRIP */
+    .strip {
+      background: var(--orange);
+      padding: 16px 0; overflow: hidden;
+    }
+    .strip-track {
+      display: flex; gap: 48px; width: max-content;
+      animation: marquee 20s linear infinite;
+    }
+    .strip-item {
+      font-family: var(--font-display);
+      font-size: 0.85rem; font-weight: 700;
+      color: white; white-space: nowrap;
+      display: flex; align-items: center; gap: 12px;
+      letter-spacing: 0.04em;
+    }
+    .strip-item::after { content: '★'; font-size: 0.7rem; opacity: 0.6; }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* SECTION */
+    .section { padding: 100px 48px; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 900; line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .section-title em { font-style: italic; color: var(--orange); }
+
+    /* BIKES */
+    .bikes-grid {
+      margin-top: 56px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .bike-card {
+      border: 1px solid rgba(26,18,8,0.08);
+      border-radius: 20px; overflow: hidden;
+      transition: all 0.3s; cursor: pointer;
+    }
+    .bike-card:hover { border-color: var(--orange); transform: translateY(-4px); box-shadow: 0 20px 48px rgba(255,107,26,0.12); }
+    .bike-card-img {
+      height: 200px; background: var(--orange-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem; position: relative; overflow: hidden;
+    }
+    .bike-card-img::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 80%, rgba(255,107,26,0.1) 0%, transparent 70%);
+    }
+    .bike-card-badge {
+      position: absolute; top: 16px; right: 16px;
+      background: var(--orange); color: white;
+      font-size: 0.68rem; font-weight: 700;
+      padding: 4px 10px; border-radius: 100px;
+      letter-spacing: 0.04em;
+    }
+    .bike-card-body { padding: 24px; }
+    .bike-card-name {
+      font-family: var(--font-display);
+      font-size: 1.2rem; font-weight: 700; margin-bottom: 6px;
+    }
+    .bike-card-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+    .bike-card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 20px; padding-top: 16px;
+      border-top: 1px solid rgba(26,18,8,0.06);
+    }
+    .price-tag { font-family: var(--font-display); font-size: 1.4rem; font-weight: 900; }
+    .price-tag span { font-size: 0.8rem; font-weight: 400; color: var(--muted); font-family: var(--font-body); }
+    .reserve-btn {
+      background: var(--dark); color: white;
+      border: none; border-radius: 100px;
+      padding: 8px 18px; font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .reserve-btn:hover { background: var(--orange); }
+
+    /* TOURS */
+    .tours-section { background: var(--dark); color: white; }
+    .tours-section .section-title { color: white; }
+    .tours-grid {
+      margin-top: 56px;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
+      background: rgba(255,255,255,0.05);
+    }
+    .tour-card {
+      background: var(--dark); padding: 40px;
+      transition: background 0.3s; cursor: pointer;
+      position: relative; overflow: hidden;
+    }
+    .tour-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 3px; height: 0; background: var(--orange);
+      transition: height 0.4s;
+    }
+    .tour-card:hover { background: #2A1F14; }
+    .tour-card:hover::before { height: 100%; }
+    .tour-emoji { font-size: 2.5rem; margin-bottom: 16px; display: block; }
+    .tour-name {
+      font-family: var(--font-display);
+      font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; color: white;
+    }
+    .tour-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+    .tour-meta {
+      margin-top: 24px; display: flex; gap: 20px; flex-wrap: wrap;
+    }
+    .tour-meta-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; color: rgba(255,255,255,0.4);
+    }
+    .tour-meta-item strong { color: var(--orange); }
+    .tour-langs {
+      margin-top: 16px; display: flex; gap: 6px;
+    }
+    .lang-tag {
+      font-size: 0.68rem; font-weight: 600;
+      padding: 3px 8px; border-radius: 4px;
+      background: rgba(255,107,26,0.15); color: var(--orange);
+    }
+
+    /* COMO FUNCIONA */
+    .steps-grid {
+      margin-top: 56px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+      background: var(--border);
+    }
+    .step {
+      background: var(--white); padding: 36px 28px;
+    }
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 3rem; font-weight: 900;
+      color: rgba(255,107,26,0.12); line-height: 1;
+      margin-bottom: 16px;
+    }
+    .step-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 8px; }
+    .step-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+    /* CHATBOX */
+    .chat-section {
+      background: var(--orange-pale);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .chat-wrapper {
+      max-width: 800px; margin: 0 auto; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 40px;
+    }
+    .chat-info .section-title { max-width: 400px; }
+    .chat-features { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+    .chat-feature {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 16px; background: white; border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .chat-feature-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(255,107,26,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .chat-feature-title { font-weight: 600; font-size: 0.88rem; }
+    .chat-feature-desc { font-size: 0.78rem; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+
+    /* CHAT WIDGET */
+    /* CHAT WIDGET POPUP */
+    .chat-widget {
+      position: fixed;
+      bottom: 100px;
+      right: 32px;
+      width: 760px;
+      max-width: calc(100% - 64px);
+      height: 600px;
+      z-index: 1000;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 24px 64px rgba(26,18,8,0.18), 0 0 0 1px rgba(26,18,8,0.05);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+      pointer-events: none;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+      visibility: hidden;
+    }
+    .chat-widget.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: all;
+      visibility: visible;
+    }
+    .chat-header {
+      background: var(--orange); padding: 20px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px;
+    }
+    .chat-header-info { display: flex; align-items: center; gap: 12px; }
+    .chat-close {
+      background: rgba(255,255,255,0.2);
+      border: none; color: white;
+      width: 28px; height: 28px;
+      border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; transition: all 0.2s;
+    }
+    .chat-close:hover { background: rgba(255,255,255,0.3); transform: rotate(90deg); }
+    .chat-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .chat-header-name { font-weight: 700; color: white; font-size: 0.95rem; }
+    .chat-header-status { font-size: 0.72rem; color: rgba(255,255,255,0.7); }
+    .chat-header-status::before { content: '● '; color: #86efac; }
+    .chat-messages {
+      padding: 20px; flex: 1;
+      overflow-y: auto; display: flex; flex-direction: column; gap: 12px;
+      scroll-behavior: smooth;
+      background: #fdfdfb;
+    }
+    .chat-messages::-webkit-scrollbar { width: 4px; }
+    .chat-messages::-webkit-scrollbar-track { background: transparent; }
+    .chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    .msg {
+      max-width: 500px; padding: 10px 14px;
+      border-radius: 14px; font-size: 0.83rem; line-height: 1.5;
+      animation: msgIn 0.3s ease;
+    }
+    @keyframes msgIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    .msg.bot {
+      background: #f4f4f4; color: var(--dark);
+      align-self: flex-start; border-bottom-left-radius: 4px;
+    }
+    .msg.user {
+      background: var(--orange); color: white;
+      align-self: flex-end; border-bottom-right-radius: 4px;
+    }
+    .msg-time { font-size: 0.65rem; color: var(--muted); margin-top: 4px; }
+    .msg.user .msg-time { color: rgba(255,255,255,0.6); text-align: right; }
+    .chat-options {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      padding: 0 20px 12px;
+    }
+    .chat-option {
+      font-size: 0.78rem; font-weight: 500;
+      padding: 7px 14px; border-radius: 100px;
+      border: 1.5px solid var(--border); background: white;
+      cursor: pointer; transition: all 0.2s; color: var(--dark);
+    }
+    .chat-option:hover { border-color: var(--orange); color: var(--orange); background: var(--orange-pale); }
+    .chat-input-area {
+      padding: 12px 16px; border-top: 1px solid var(--border);
+      display: flex; gap: 8px; align-items: center;
+    }
+    .chat-input {
+      flex: 1; border: 1.5px solid rgba(26,18,8,0.1);
+      border-radius: 100px; padding: 10px 16px;
+      font-size: 0.83rem; font-family: var(--font-body);
+      outline: none; transition: border 0.2s;
+      color: var(--dark);
+    }
+    .chat-input:focus { border-color: var(--orange); }
+    .chat-send {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--orange); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 1rem; transition: all 0.2s;
+    }
+    .chat-send:hover { background: var(--orange-light); transform: scale(1.05); }
+
+    /* MAPA */
+    .map-section { background: var(--dark); color: white; }
+    .map-section .section-title { color: white; }
+    .map-wrapper {
+      margin-top: 48px; display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: start;
+    }
+    .location-info { }
+    .location-address {
+      margin-top: 24px; padding: 20px;
+      background: rgba(255,255,255,0.05); border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .location-address p { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.8; }
+    .location-address strong { color: white; }
+    .hours-grid { margin-top: 20px; display: flex; flex-direction: column; gap: 8px; }
+    .hours-row {
+      display: flex; justify-content: space-between;
+      font-size: 0.82rem; color: rgba(255,255,255,0.5);
+      padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .hours-row strong { color: white; }
+    .map-embed {
+      border-radius: 20px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      height: 380px; background: rgba(255,255,255,0.03);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 12px; color: rgba(255,255,255,0.2);
+      font-size: 3rem;
+    }
+    .map-embed p { font-size: 0.85rem; color: rgba(255,255,255,0.3); }
+
+    /* FOOTER */
+    footer {
+      padding: 48px;
+      border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px;
+      align-items: start;
+    }
+    .footer-logo img {
+      height: 50px;
+      width: auto;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+    }
+    .footer-tagline { font-size: 0.82rem; color: var(--muted); margin-top: 8px; line-height: 1.6; }
+    .footer-col-title { font-weight: 700; font-size: 0.85rem; margin-bottom: 16px; }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--orange); }
+    .footer-bottom {
+      padding: 20px 48px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-bottom p { font-size: 0.78rem; color: var(--muted); }
+    .made-with { font-size: 0.78rem; color: var(--muted); }
+    .made-with span { color: var(--orange); }
+
+    /* Floating chat button */
+    .float-chat {
+      position: fixed; bottom: 32px; right: 32px; z-index: 200;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--orange); color: white;
+      border: none; cursor: pointer; font-size: 1.4rem;
+      box-shadow: 0 8px 24px rgba(255,107,26,0.35);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s;
+      animation: floatIn 0.5s 1s ease both;
+    }
+    .float-chat:hover { transform: scale(1.1); box-shadow: 0 12px 32px rgba(255,107,26,0.45); }
+    @keyframes floatIn { from{opacity:0;transform:scale(0.5)} to{opacity:1;transform:scale(1)} }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(24px); transition: all 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media(max-width:768px) {
+      nav { padding: 16px 20px; }
+      .nav-links, .nav-langs { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 90px 20px 40px; }
+      .hero-visual { display: none; }
+      .section { padding: 60px 20px; }
+      .bikes-grid { grid-template-columns: 1fr; }
+      .tours-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+      .chat-wrapper { gap: 32px; }
+      .chat-widget {
+        right: 16px; bottom: 80px;
+        width: calc(100% - 32px);
+        height: calc(100% - 100px);
+        max-height: 600px;
+      }
+      .map-wrapper { grid-template-columns: 1fr; }
+      footer { grid-template-columns: 1fr; padding: 40px 20px; }
+      .footer-bottom { flex-direction: column; gap: 8px; padding: 16px 20px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FLOAT CHAT BUTTON -->
+  <button class="float-chat" onclick="toggleChat(true)">🚲</button>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">
+      <img src="assets/logo.png" alt="BiciRastro Logo">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#bikes" data-i18n="nav_bikes">Bicicletas</a></li>
+      <li><a href="#tours" data-i18n="nav_tours">Tours</a></li>
+      <li><a href="javascript:void(0)" onclick="toggleChat(true)" data-i18n="nav_reserve">Reservar</a></li>
+      <li><a href="#localização" data-i18n="nav_location">Dónde estamos</a></li>
+    </ul>
+    <div class="nav-langs">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="javascript:void(0)" onclick="toggleChat(true)" class="nav-cta" data-i18n="nav_cta">Reservar ahora</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-circle"></div>
+    <div class="hero-circle-2"></div>
+    <div class="hero-content">
+      <div class="hero-badge"><span class="flag">🇪🇸</span> <span data-i18n="hero_location">Valencia, España</span></div>
+      <h1><span data-i18n="hero_title1">Pedalea por la</span><br/><em data-i18n="hero_title2">ciudad más</em><br/><span data-i18n="hero_title3">bonita de España</span></h1>
+      <p class="hero-sub" data-i18n="hero_sub">Alquila tu bici, elige tu tour y descubre Valencia a tu ritmo — con reserva rápida directo por el chat.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="toggleChat(true)" data-i18n="hero_btn_reserve">🚲 Reservar ahora</button>
+        <a href="#tours" class="btn-outline" data-i18n="hero_btn_tours">Ver tours →</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">500<span>+</span></div>
+          <div class="stat-label" data-i18n="stat_customers">Clientes por mes</div>
+        </div>
+        <div>
+          <div class="stat-num">12<span>+</span></div>
+          <div class="stat-label" data-i18n="stat_routes">Rutas disponibles</div>
+        </div>
+        <div>
+          <div class="stat-num">4.9<span>★</span></div>
+          <div class="stat-label">Google Reviews</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-tag" data-i18n="card_tag">🟢 Disponible hoy</div>
+        <div class="bike-list">
+          <div class="bike-item featured">
+            <div class="bike-info">
+              <span class="bike-icon">🚲</span>
+              <div>
+                <div class="bike-name">City Bike Classic</div>
+                <div class="bike-detail" data-i18n="card_bike1_desc">Ideal para paseos urbanos</div>
+              </div>
+            </div>
+            <div class="bike-price">€8/h</div>
+          </div>
+          <div class="bike-item">
+            <div class="bike-info">
+              <span class="bike-icon">⚡</span>
+              <div>
+                <div class="bike-name" data-i18n="card_bike2_name">E-Bike Eléctrica</div>
+                <div class="bike-detail" data-i18n="card_bike2_desc">Sin esfuerzo, más distancia</div>
+              </div>
+            </div>
+            <div class="bike-price">€14/h</div>
+          </div>
+          <div class="bike-item">
+            <div class="bike-info">
+              <span class="bike-icon">🏔️</span>
+              <div>
+                <div class="bike-name">Mountain Bike</div>
+                <div class="bike-detail" data-i18n="card_bike3_desc">Para rutas y aventura</div>
+              </div>
+            </div>
+            <div class="bike-price">€12/h</div>
+          </div>
+        </div>
+        <div class="hero-card-footer">
+          <div><span class="avail-dot"></span><span class="avail-text" data-i18n="card_avail">47 bicis disponibles ahora</span></div>
+          <button class="reserve-btn" onclick="document.getElementById('chat-section').scrollIntoView({behavior:'smooth'})">Reservar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="strip-track">
+      <span class="strip-item" data-i18n="strip_1">Alquiler por horas</span>
+      <span class="strip-item" data-i18n="strip_2">Tours guiados</span>
+      <span class="strip-item" data-i18n="strip_3">Reserva por chat</span>
+      <span class="strip-item" data-i18n="strip_4">Bicis eléctricas</span>
+      <span class="strip-item">ES • EN</span>
+      <span class="strip-item" data-i18n="strip_5">Centro de Valencia</span>
+      <span class="strip-item" data-i18n="strip_6">Casco incluido</span>
+      <span class="strip-item" data-i18n="strip_1">Alquiler por horas</span>
+      <span class="strip-item" data-i18n="strip_2">Tours guiados</span>
+      <span class="strip-item" data-i18n="strip_3">Reserva por chat</span>
+      <span class="strip-item" data-i18n="strip_4">Bicis eléctricas</span>
+      <span class="strip-item">ES • EN</span>
+      <span class="strip-item" data-i18n="strip_5">Centro de Valencia</span>
+      <span class="strip-item" data-i18n="strip_6">Casco incluido</span>
+    </div>
+  </div>
+
+  <!-- BIKES -->
+  <section class="section" id="bikes">
+    <div class="section-label" data-i18n="bikes_label">Nuestra flota</div>
+    <h2 class="section-title reveal"><span data-i18n="bikes_title1">La bici perfecta para</span> <em data-i18n="bikes_title2">cada aventura</em></h2>
+    <div class="bikes-grid">
+      <div class="bike-card reveal">
+        <div class="bike-card-img">🚲<span class="bike-card-badge" data-i18n="badge_popular">MÁS POPULAR</span></div>
+        <div class="bike-card-body">
+          <div class="bike-card-name">City Bike Classic</div>
+          <p class="bike-card-desc" data-i18n="bike1_desc">Ligera, cómoda y perfecta para explorar el centro histórico, jardines y la costa de Valencia.</p>
+          <div class="bike-card-footer">
+            <div class="price-tag">€8 <span data-i18n="per_hour">/ hora</span></div>
+            <button class="reserve-btn" onclick="toggleChat(true)" data-i18n="btn_reserve">Reservar</button>
+          </div>
+        </div>
+      </div>
+      <div class="bike-card reveal">
+        <div class="bike-card-img">⚡<span class="bike-card-badge" data-i18n="badge_new">NOVEDAD</span></div>
+        <div class="bike-card-body">
+          <div class="bike-card-name">E-Bike Elétrica</div>
+          <p class="bike-card-desc" data-i18n="bike2_desc">Asistencia eléctrica para ir más lejos sin cansancio. Ideal para tours largos y subidas.</p>
+          <div class="bike-card-footer">
+            <div class="price-tag">€14 <span data-i18n="per_hour">/ hora</span></div>
+            <button class="reserve-btn" onclick="toggleChat(true)" data-i18n="btn_reserve">Reservar</button>
+          </div>
+        </div>
+      </div>
+      <div class="bike-card reveal">
+        <div class="bike-card-img">👨‍👩‍👧</div>
+        <div class="bike-card-body">
+          <div class="bike-card-name" data-i18n="bike3_name">Bici Familiar</div>
+          <p class="bike-card-desc" data-i18n="bike3_desc">Opciones para niños y silla infantil. Pedalea en familia por el jardín del Turia.</p>
+          <div class="bike-card-footer">
+            <div class="price-tag">€6 <span data-i18n="per_hour">/ hora</span></div>
+            <button class="reserve-btn" onclick="toggleChat(true)" data-i18n="btn_reserve">Reservar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOURS -->
+  <section class="section tours-section" id="tours">
+    <div class="section-label" style="color:rgba(255,107,26,0.8)" data-i18n="tours_label">Nuestros tours</div>
+    <h2 class="section-title reveal"><span data-i18n="tours_title1">Rutas que</span> <em data-i18n="tours_title2">no olvidarás</em></h2>
+    <div class="tours-grid">
+      <div class="tour-card reveal">
+        <span class="tour-emoji">🏛️</span>
+        <div class="tour-name" data-i18n="tour1_name">Centro Histórico</div>
+        <p class="tour-desc" data-i18n="tour1_desc">De la Catedral al Mercado Central — los puntos más icónicos de Valencia en un solo paseo.</p>
+        <div class="tour-meta">
+          <div class="tour-meta-item">⏱ <strong>2h</strong></div>
+          <div class="tour-meta-item">📍 <strong>12km</strong></div>
+          <div class="tour-meta-item">👥 <strong data-i18n="tour1_pax">Hasta 10 personas</strong></div>
+          <div class="tour-meta-item">💶 <strong data-i18n="tour1_price">€25/persona</strong></div>
+        </div>
+        <div class="tour-langs">
+          <span class="lang-tag">PT</span>
+          <span class="lang-tag">ES</span>
+          <span class="lang-tag">EN</span>
+        </div>
+      </div>
+      <div class="tour-card reveal">
+        <span class="tour-emoji">🌊</span>
+        <div class="tour-name" data-i18n="tour2_name">Playa & Malvarrosa</div>
+        <p class="tour-desc" data-i18n="tour2_desc">Del centro a la playa por el jardín del Turia. La mejor ruta ciclista de la ciudad.</p>
+        <div class="tour-meta">
+          <div class="tour-meta-item">⏱ <strong>3h</strong></div>
+          <div class="tour-meta-item">📍 <strong>18km</strong></div>
+          <div class="tour-meta-item">👥 <strong data-i18n="tour2_pax">Hasta 8 personas</strong></div>
+          <div class="tour-meta-item">💶 <strong data-i18n="tour2_price">€30/persona</strong></div>
+        </div>
+        <div class="tour-langs">
+          <span class="lang-tag">PT</span>
+          <span class="lang-tag">ES</span>
+          <span class="lang-tag">EN</span>
+        </div>
+      </div>
+      <div class="tour-card reveal">
+        <span class="tour-emoji">🌿</span>
+        <div class="tour-name" data-i18n="tour3_name">Jardín del Turia</div>
+        <p class="tour-desc" data-i18n="tour3_desc">El pulmón verde de Valencia — 9km de parque en un antiguo cauce de río. Relajante y único.</p>
+        <div class="tour-meta">
+          <div class="tour-meta-item">⏱ <strong>1h30</strong></div>
+          <div class="tour-meta-item">📍 <strong>9km</strong></div>
+          <div class="tour-meta-item">👥 <strong data-i18n="tour3_pax">Hasta 12 personas</strong></div>
+          <div class="tour-meta-item">💶 <strong data-i18n="tour3_price">€18/persona</strong></div>
+        </div>
+        <div class="tour-langs">
+          <span class="lang-tag">PT</span>
+          <span class="lang-tag">ES</span>
+          <span class="lang-tag">EN</span>
+        </div>
+      </div>
+      <div class="tour-card reveal">
+        <span class="tour-emoji">🌅</span>
+        <div class="tour-name" data-i18n="tour4_name">Atardecer & Tapas</div>
+        <p class="tour-desc" data-i18n="tour4_desc">Tour al atardecer por los barrios más de moda con parada para tapas. La experiencia completa.</p>
+        <div class="tour-meta">
+          <div class="tour-meta-item">⏱ <strong>3h30</strong></div>
+          <div class="tour-meta-item">📍 <strong>14km</strong></div>
+          <div class="tour-meta-item">👥 <strong data-i18n="tour2_pax">Hasta 8 personas</strong></div>
+          <div class="tour-meta-item">💶 <strong data-i18n="tour4_price">€45/persona</strong></div>
+        </div>
+        <div class="tour-langs">
+          <span class="lang-tag">PT</span>
+          <span class="lang-tag">ES</span>
+          <span class="lang-tag">EN</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="section">
+    <div class="section-label" data-i18n="steps_label">Cómo funciona</div>
+    <h2 class="section-title reveal"><span data-i18n="steps_title1">Reserva en</span> <em data-i18n="steps_title2">menos de 2 minutos</em></h2>
+    <div class="steps-grid">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-title" data-i18n="step1_title">Abre el chat</div>
+        <p class="step-desc" data-i18n="step1_desc">Haz clic en el botón de reserva y nuestro asistente está listo para atenderte.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-title" data-i18n="step2_title">Elige la bici o tour</div>
+        <p class="step-desc" data-i18n="step2_desc">Dinos qué quieres — bici suelta o tour guiado — y la fecha que prefieres.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-title" data-i18n="step3_title">Confirma los datos</div>
+        <p class="step-desc" data-i18n="step3_desc">Nombre, hora y cuántas personas. El asistente confirma la disponibilidad al instante.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <div class="step-title" data-i18n="step4_title">¡A pedalear!</div>
+        <p class="step-desc" data-i18n="step4_desc">Ven a la hora, recoge tu bici y disfruta de Valencia de la manera más bonita.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAT SECTION -->
+  <section class="section chat-section" id="reserva">
+    <div class="chat-wrapper">
+      <div class="chat-info reveal">
+        <div class="section-label" data-i18n="chat_label">Reserva instantánea</div>
+        <h2 class="section-title"><span data-i18n="chat_title1">Reserva tu bici</span> <em data-i18n="chat_title2">ahora mismo</em></h2>
+        <div class="chat-features">
+          <div class="chat-feature">
+            <div class="chat-feature-icon">⚡</div>
+            <div>
+              <div class="chat-feature-title" data-i18n="feat1_title">Respuesta inmediata</div>
+              <div class="chat-feature-desc" data-i18n="feat1_desc">Nuestro asistente está disponible 24h. Reserva a cualquier hora, incluso de madrugada.</div>
+            </div>
+          </div>
+          <div class="chat-feature">
+            <div class="chat-feature-icon">🌐</div>
+            <div>
+              <div class="chat-feature-title" data-i18n="feat2_title">2 idiomas</div>
+              <div class="chat-feature-desc" data-i18n="feat2_desc">Atención en español e inglés. Habla en el idioma que prefieras.</div>
+            </div>
+          </div>
+          <div class="chat-feature">
+            <div class="chat-feature-icon">✅</div>
+            <div>
+              <div class="chat-feature-title" data-i18n="feat3_title">Confirmación al instante</div>
+              <div class="chat-feature-desc" data-i18n="feat3_desc">Disponibilidad verificada en tiempo real. Sin esperas, sin sorpresas al llegar.</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 40px;">
+          <button class="btn-primary" onclick="toggleChat(true)" data-i18n="btn_open_chat">Abrir chat de reserva</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCALIZAÇÃO -->
+  <section class="section map-section" id="localização">
+    <div class="section-label" style="color:rgba(255,107,26,0.7)" data-i18n="map_label">Dónde estamos</div>
+    <h2 class="section-title reveal"><span data-i18n="map_title1">En el</span> <em data-i18n="map_title2">corazón</em> <span data-i18n="map_title3">de Valencia</span></h2>
+    <div class="map-wrapper">
+      <div class="location-info reveal">
+        <div class="location-address">
+          <p>
+            <strong data-i18n="map_bici">Bici Rastro Valencia</strong><br/>
+            Carrer de la Pau, 12<br/>
+            <span data-i18n="map_city">46002 Valencia, España</span><br/><br/>
+            <strong>📞</strong> +34 960 000 000<br/>
+            <strong>📧</strong> hola@bicirastro.com
+          </p>
+        </div>
+        <div class="hours-grid">
+          <div class="hours-row"><span data-i18n="day_mon_fri">Lunes — Viernes</span><strong>08:00 – 20:00</strong></div>
+          <div class="hours-row"><span data-i18n="day_sat">Sábado</span><strong>07:00 – 22:00</strong></div>
+          <div class="hours-row"><span data-i18n="day_sun">Domingo</span><strong>08:00 – 20:00</strong></div>
+          <div class="hours-row"><span data-i18n="day_holidays">Festivos</span><strong>09:00 – 18:00</strong></div>
+        </div>
+      </div>
+      <div class="map-embed reveal">
+        🗺️
+        <p data-i18n="map_embed_text">Carrer de la Pau, 12 — Valencia</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="footer-logo">
+        <img src="assets/logo.png" alt="BiciRastro Logo">
+      </div>
+      <p class="footer-tagline" data-i18n="footer_tagline">La manera más bonita de conocer Valencia en bicicleta — con reserva rápida por chat.</p>
+    </div>
+    <div>
+      <div class="footer-col-title" data-i18n="footer_links">Enlaces</div>
+      <div class="footer-links">
+        <a href="#bikes">Bicicletas</a>
+        <a href="#tours">Tours</a>
+        <a href="#chat-section" data-i18n="nav_reserve">Reservar</a>
+        <a href="#localização" data-i18n="nav_location">Dónde estamos</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Tours</div>
+      <div class="footer-links">
+        <a href="#" data-i18n="tour1_name">Centro Histórico</a>
+        <a href="#" data-i18n="tour2_name">Playa & Malvarrosa</a>
+        <a href="#" data-i18n="tour3_name">Jardín del Turia</a>
+        <a href="#" data-i18n="tour4_name">Atardecer & Tapas</a>
+      </div>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p data-i18n="footer_rights">© 2025 Bici Rastro — Todos los derechos reservados</p>
+    <p class="made-with"><span data-i18n="footer_made">Hecho por</span> <span>Rastro Studio</span> ✦ rastrostudio.com</p>
+  </div>
+
+  <!-- FLOATING CHAT WIDGET -->
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-avatar">🚲</div>
+        <div>
+          <div class="chat-header-name" data-i18n="chat_header_name">Asistente Bici Rastro</div>
+          <div class="chat-header-status" data-i18n="chat_header_status">Online ahora</div>
+        </div>
+      </div>
+      <button class="chat-close" onclick="toggleChat(false)">×</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg bot">
+        Olá! 👋 Bem-vindo à BiciRastro! Sou seu assistente de reservas.<br/><br/>
+        O que você gostaria de fazer hoje?
+        <div class="msg-time">agora</div>
+      </div>
+    </div>
+    <div class="chat-options" id="chatOptions">
+      <button class="chat-option" onclick="chatFlow('aluguel')">🚲 Alugar bike</button>
+      <button class="chat-option" onclick="chatFlow('tour')">🗺️ Reservar tour</button>
+      <button class="chat-option" onclick="chatFlow('precos')">💶 Ver preços</button>
+      <button class="chat-option" onclick="chatFlow('horarios')">⏰ Horários</button>
+    </div>
+    <div class="chat-input-area">
+      <input class="chat-input" id="chatInput" placeholder="Escreva sua mensagem..." onkeydown="if(event.key==='Enter')sendMsg()"/>
+      <button class="chat-send" onclick="sendMsg()">➤</button>
+    </div>
+  </div>
+
+  <script>
+    // Nav scroll
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Language
+    const langs = {
+      es: {
+        greeting: "¡Hola! 👋 ¡Bienvenido a BiciRastro! Soy tu asistente de reservas.\n\n¿Qué te gustaría hacer hoy?",
+        opts: [['🚲 Alquilar bici','aluguel'],['🗺️ Reservar tour','tour'],['💶 Ver precios','precos'],['⏰ Horarios','horarios']]
+      },
+      en: {
+        greeting: "Hello! 👋 Welcome to BiciRastro! I'm your booking assistant.\n\nWhat would you like to do today?",
+        opts: [['🚲 Rent a bike','aluguel'],['🗺️ Book a tour','tour'],['💶 See prices','precos'],['⏰ Hours','horarios']]
+      }
+    };
+    let currentLang = 'es';
+    // Translations for page content
+    const pageTranslations = {
+      es: {
+        page_title: "Bici Rastro — Alquiler de Bicicletas en Valencia",
+        nav_bikes: "Bicicletas", nav_tours: "Tours", nav_reserve: "Reservar", nav_location: "Dónde estamos", nav_cta: "Reservar ahora",
+        hero_location: "Valencia, España", hero_title1: "Pedalea por la", hero_title2: "ciudad más", hero_title3: "bonita de España", hero_sub: "Alquila tu bici, elige tu tour y descubre Valencia a tu ritmo — con reserva rápida directo por el chat.", hero_btn_reserve: "🚲 Reservar ahora", hero_btn_tours: "Ver tours →",
+        stat_customers: "Clientes por mes", stat_routes: "Rutas disponibles",
+        card_tag: "🟢 Disponible hoy", card_bike1_desc: "Ideal para paseos urbanos", card_bike2_name: "E-Bike Eléctrica", card_bike2_desc: "Sin esfuerzo, más distancia", card_bike3_desc: "Para rutas y aventura", card_avail: "47 bicis disponibles ahora", btn_reserve: "Reservar",
+        strip_1: "Alquiler por horas", strip_2: "Tours guiados", strip_3: "Reserva por chat", strip_4: "Bicis eléctricas", strip_5: "Centro de Valencia", strip_6: "Casco incluido",
+        bikes_label: "Nuestra flota", bikes_title1: "La bici perfecta para", bikes_title2: "cada aventura", badge_popular: "MÁS POPULAR", bike1_desc: "Ligera, cómoda y perfecta para explorar el centro histórico, jardines y la costa de Valencia.", per_hour: "/ hora", badge_new: "NOVEDAD", bike2_name: "E-Bike Eléctrica", bike2_desc: "Asistencia eléctrica para ir más lejos sin cansancio. Ideal para tours largos y subidas.", bike3_name: "Bici Familiar", bike3_desc: "Opciones para niños y silla infantil. Pedalea en familia por el jardín del Turia.",
+        tours_label: "Nuestros tours", tours_title1: "Rutas que", tours_title2: "no olvidarás", tour1_name: "Centro Histórico", tour1_desc: "De la Catedral al Mercado Central — los puntos más icónicos de Valencia en un solo paseo.", tour1_pax: "Hasta 10 personas", tour1_price: "€25/persona", tour2_name: "Playa & Malvarrosa", tour2_desc: "Del centro a la playa por el jardín del Turia. La mejor ruta ciclista de la ciudad.", tour2_pax: "Hasta 8 personas", tour2_price: "€30/persona", tour3_name: "Jardín del Turia", tour3_desc: "El pulmón verde de Valencia — 9km de parque en un antiguo cauce de río. Relajante y único.", tour3_pax: "Hasta 12 personas", tour3_price: "€18/persona", tour4_name: "Atardecer & Tapas", tour4_desc: "Tour al atardecer por los barrios más de moda con parada para tapas. La experiencia completa.", tour4_price: "€45/persona",
+        steps_label: "Cómo funciona", steps_title1: "Reserva en", steps_title2: "menos de 2 minutos", step1_title: "Abre el chat", step1_desc: "Haz clic en el botón de reserva y nuestro asistente está listo para atenderte.", step2_title: "Elige la bici o tour", step2_desc: "Dinos qué quieres — bici suelta o tour guiado — y la fecha que prefieres.", step3_title: "Confirma los datos", step3_desc: "Nombre, hora y cuántas personas. El asistente confirma la disponibilidad al instante.", step4_title: "¡A pedalear!", step4_desc: "Ven a la hora, recoge tu bici y disfruta de Valencia de la manera más bonita.",
+        chat_label: "Reserva instantánea", chat_title1: "Reserva tu bici", chat_title2: "ahora mismo", feat1_title: "Respuesta inmediata", feat1_desc: "Nuestro asistente está disponible 24h. Reserva a cualquier hora, incluso de madrugada.", feat2_title: "2 idiomas", feat2_desc: "Atención en español e inglés. Habla en el idioma que prefieras.", feat3_title: "Confirmación al instante", feat3_desc: "Disponibilidad verificada en tiempo real. Sin esperas, sin sorpresas al llegar.", btn_open_chat: "Abrir chat de reserva",
+        map_label: "Dónde estamos", map_title1: "En el", map_title2: "corazón", map_title3: "de Valencia", map_bici: "Bici Rastro Valencia", map_city: "46002 Valencia, España", day_mon_fri: "Lunes — Viernes", day_sat: "Sábado", day_sun: "Domingo", day_holidays: "Festivos", map_embed_text: "Carrer de la Pau, 12 — Valencia",
+        footer_tagline: "La manera más bonita de conocer Valencia en bicicleta — con reserva rápida por chat.", footer_links: "Enlaces", footer_rights: "© 2025 Bici Rastro — Todos los derechos reservados", footer_made: "Hecho por",
+        chat_header_name: "Asistente Bici Rastro", chat_header_status: "Online ahora", chat_input: "Escribe tu mensaje..."
+      },
+      en: {
+        page_title: "Bici Rastro — Bike Rental in Valencia",
+        nav_bikes: "Bikes", nav_tours: "Tours", nav_reserve: "Book", nav_location: "Location", nav_cta: "Book Now",
+        hero_location: "Valencia, Spain", hero_title1: "Ride through the", hero_title2: "most beautiful", hero_title3: "city in Spain", hero_sub: "Rent your bike, choose your tour and discover Valencia at your own pace — with quick booking via chat.", hero_btn_reserve: "🚲 Book now", hero_btn_tours: "View tours →",
+        stat_customers: "Customers/month", stat_routes: "Available routes",
+        card_tag: "🟢 Available today", card_bike1_desc: "Ideal for city rides", card_bike2_name: "Electric E-Bike", card_bike2_desc: "Effortless, more distance", card_bike3_desc: "For trails and adventure", card_avail: "47 bikes available now", btn_reserve: "Book",
+        strip_1: "Hourly rental", strip_2: "Guided tours", strip_3: "Chat booking", strip_4: "E-bikes", strip_5: "Valencia Center", strip_6: "Helmet included",
+        bikes_label: "Our fleet", bikes_title1: "The perfect bike for", bikes_title2: "every adventure", badge_popular: "MOST POPULAR", bike1_desc: "Light, comfortable and perfect for exploring the historic center, gardens and the coast of Valencia.", per_hour: "/ hour", badge_new: "NEW", bike2_name: "Electric E-Bike", bike2_desc: "Electric assistance to go further without getting tired. Ideal for long tours and hills.", bike3_name: "Family Bike", bike3_desc: "Options for kids and child seat. Ride with your family through the Turia garden.",
+        tours_label: "Our tours", tours_title1: "Routes you", tours_title2: "won't forget", tour1_name: "Historic Center", tour1_desc: "From the Cathedral to the Central Market — the most iconic spots in Valencia in a single ride.", tour1_pax: "Up to 10 people", tour1_price: "€25/person", tour2_name: "Beach & Malvarrosa", tour2_desc: "From the center to the beach through the Turia garden. The best cycling route in the city.", tour2_pax: "Up to 8 people", tour2_price: "€30/person", tour3_name: "Turia Garden", tour3_desc: "The green lung of Valencia — 9km of park in an old riverbed. Relaxing and unique.", tour3_pax: "Up to 12 people", tour3_price: "€18/person", tour4_name: "Sunset & Tapas", tour4_desc: "Sunset tour through the trendiest neighborhoods with a stop for tapas. The complete experience.", tour4_price: "€45/person",
+        steps_label: "How it works", steps_title1: "Book in", steps_title2: "under 2 minutes", step1_title: "Open the chat", step1_desc: "Click the booking button and our assistant is ready to help you.", step2_title: "Choose bike or tour", step2_desc: "Tell us what you want — single bike or guided tour — and your preferred date.", step3_title: "Confirm details", step3_desc: "Name, time and how many people. The assistant confirms availability instantly.", step4_title: "Let's ride!", step4_desc: "Show up on time, pick up your bike and enjoy Valencia in the most beautiful way.",
+        chat_label: "Instant booking", chat_title1: "Book your bike", chat_title2: "right now", feat1_title: "Immediate response", feat1_desc: "Our assistant is available 24/7. Book anytime, even late at night.", feat2_title: "2 languages", feat2_desc: "Support in Spanish and English. Speak in the language you prefer.", feat3_title: "Instant confirmation", feat3_desc: "Availability checked in real time. No waiting, no surprises when you arrive.", btn_open_chat: "Open booking chat",
+        map_label: "Location", map_title1: "In the", map_title2: "heart", map_title3: "of Valencia", map_bici: "Bici Rastro Valencia", map_city: "46002 Valencia, Spain", day_mon_fri: "Monday — Friday", day_sat: "Saturday", day_sun: "Sunday", day_holidays: "Holidays", map_embed_text: "Carrer de la Pau, 12 — Valencia",
+        footer_tagline: "The most beautiful way to discover Valencia by bike — with quick chat booking.", footer_links: "Links", footer_rights: "© 2025 Bici Rastro — All rights reserved", footer_made: "Made by",
+        chat_header_name: "Bici Rastro Assistant", chat_header_status: "Online now", chat_input: "Write your message..."
+      }
+    };
+
+    function updatePageContent() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if(pageTranslations[currentLang] && pageTranslations[currentLang][key]) {
+          el.innerHTML = pageTranslations[currentLang][key];
+        }
+      });
+      document.getElementById('chatInput').placeholder = pageTranslations[currentLang]['chat_input'];
+      document.documentElement.lang = currentLang;
+      document.title = pageTranslations[currentLang]['page_title'];
+    }
+
+
+    function setLang(lang) {
+      currentLang = lang;
+      updatePageContent();
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+      resetChat();
+    }
+
+    function resetChat() {
+      const msgs = document.getElementById('chatMessages');
+      const opts = document.getElementById('chatOptions');
+      const l = langs[currentLang];
+      msgs.innerHTML = `<div class="msg bot">${l.greeting.replace(/\n/g,'<br/>')}<div class="msg-time">agora</div></div>`;
+      opts.innerHTML = l.opts.map(o => `<button class="chat-option" onclick="chatFlow('${o[1]}')">${o[0]}</button>`).join('');
+    }
+
+    // TOGGLE CHAT
+    function toggleChat(show) {
+      const widget = document.getElementById('chatWidget');
+      if (show) {
+        widget.classList.add('active');
+        setTimeout(() => document.getElementById('chatInput').focus(), 400);
+        const msgs = document.getElementById('chatMessages');
+        msgs.scrollTop = msgs.scrollHeight;
+      } else {
+        widget.classList.remove('active');
+      }
+    }
+
+    // Close on ESC
+    window.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape') toggleChat(false);
+    });
+
+    // Close on click outside
+    document.addEventListener('mousedown', (e) => {
+      const widget = document.getElementById('chatWidget');
+      const btn = document.querySelector('.float-chat');
+      if (widget.classList.contains('active') && !widget.contains(e.target) && !btn.contains(e.target)) {
+        toggleChat(false);
+      }
+    });
+
+    // Chat flow
+    const flows = {
+      aluguel: {
+        es: ["¡Genial! 🚲\n\nTenemos 3 tipos de bicicleta:\n\n🚲 City Bike Classic — €8/h\n⚡ E-Bike Eléctrica — €14/h\n👨‍👩‍👧 Bici Familiar — €6/h\n\n¿Cuál prefieres?",
+             ['🚲 City Bike','city'],['⚡ E-Bike','ebike'],['👨‍👩‍👧 Familiar','familia']],
+        en: ["Great choice! 🚲\n\nWe have 3 bike types:\n\n🚲 City Bike Classic — €8/h\n⚡ Electric E-Bike — €14/h\n👨‍👩‍👧 Family Bike — €6/h\n\nWhich do you prefer?",
+             ['🚲 City Bike','city'],['⚡ E-Bike','ebike'],['👨‍👩‍👧 Family','familia']]
+      },
+      tour: {
+        es: ["¡Nuestros tours salen todos los días! 🗺️\n\nElige tu tour:\n\n🏛️ Centro Histórico — 2h — €25\n🌊 Playa & Malvarrosa — 3h — €30\n🌿 Jardín del Turia — 1h30 — €18\n🌅 Atardecer & Tapas — 3h30 — €45",
+             ['🏛️ Centro','t1'],['🌊 Playa','t2'],['🌿 Turia','t3'],['🌅 Atardecer','t4']],
+        en: ["Our tours run every day! 🗺️\n\nChoose your tour:\n\n🏛️ Historic Center — 2h — €25\n🌊 Beach & Malvarrosa — 3h — €30\n🌿 Turia Garden — 1h30 — €18\n🌅 Sunset & Tapas — 3h30 — €45",
+             ['🏛️ Historic Center','t1'],['🌊 Beach','t2'],['🌿 Turia','t3'],['🌅 Sunset','t4']]
+      },
+      precos: {
+        es: ["Nuestros precios 💶\n\nBicis:\n🚲 City Bike — €8/h o €30/día\n⚡ E-Bike — €14/h o €50/día\n👨‍👩‍👧 Familiar — €6/h o €22/día\n\nTours (por persona):\n🏛️ Centro — €25\n🌊 Playa — €30\n🌿 Turia — €18\n🌅 Tapas — €45\n\n✅ ¡Casco y candado incluidos!",
+             ['🚲 Alquilar bici','aluguel'],['🗺️ Reservar tour','tour']],
+        en: ["Our prices 💶\n\nBikes:\n🚲 City Bike — €8/h or €30/day\n⚡ E-Bike — €14/h or €50/day\n👨‍👩‍👧 Family — €6/h or €22/day\n\nTours (per person):\n🏛️ Center — €25\n🌊 Beach — €30\n🌿 Turia — €18\n🌅 Tapas — €45\n\n✅ Helmet and lock included!",
+             ['🚲 Rent bike','aluguel'],['🗺️ Book tour','tour']]
+      },
+      horarios: {
+        es: ["Nuestros horarios ⏰\n\n📅 Lunes a Viernes: 08h – 20h\n📅 Sábado: 07h – 22h\n📅 Domingo: 08h – 20h\n\nTours salen a las: 09h, 11h, 14h, 16h y 18h\n\n¿Quieres reservar?",
+             ['🚲 Alquilar bici','aluguel'],['🗺️ Reservar tour','tour']],
+        en: ["Our hours ⏰\n\n📅 Monday to Friday: 08h – 20h\n📅 Saturday: 07h – 22h\n📅 Sunday: 08h – 20h\n\nTours depart at: 09h, 11h, 14h, 16h and 18h\n\nWant to book?",
+             ['🚲 Rent bike','aluguel'],['🗺️ Book tour','tour']]
+      },
+      city: { all: 'date' },
+      ebike: { all: 'date' },
+      familia: { all: 'date' },
+      t1: { all: 'date_tour' },
+      t2: { all: 'date_tour' },
+      t3: { all: 'date_tour' },
+      t4: { all: 'date_tour' },
+      date: {
+        es: ["¡Perfecto! 🗓️\n\n¿Qué fecha prefieres?\n(Ej: mañana, 15/07, próximo sábado)",[]],
+        en: ["Perfect! 🗓️\n\nWhat date do you prefer?\n(e.g. tomorrow, July 15, next Saturday)",[]]
+      },
+      date_tour: {
+        es: ["¡Excelente! 🗓️\n\n¿Qué fecha y horario prefieres?\n\nSalidas a las: 09h, 11h, 14h, 16h, 18h",['09h','11h','14h','16h','18h'].map(h=>[h,'confirm'])],
+        en: ["Excellent! 🗓️\n\nWhat date and time?\n\nDepartures at: 09h, 11h, 14h, 16h, 18h",['09h','11h','14h','16h','18h'].map(h=>[h,'confirm'])]
+      },
+      confirm: {
+        es: ["¡Ya casi! 🎉\n\nDime tu nombre y cuántas personas para confirmar:",[]],
+        en: ["Almost there! 🎉\n\nTell me your name and how many people to confirm the booking:",[]]
+      }
+    };
+
+    let awaitingName = false;
+
+    function chatFlow(key) {
+      const flow = flows[key];
+      if(!flow) return;
+
+      if(flow.all === 'date') { showBotMsg(flows.date[currentLang][0]); setOpts([]); awaitingName = false; return; }
+      if(flow.all === 'date_tour') {
+        const f = flows.date_tour[currentLang];
+        showBotMsg(f[0]);
+        setOpts(f[1] ? f[1].map(o => [o[0], 'confirm']) : []);
+        return;
+      }
+
+      const f = flow[currentLang];
+      if(!f) return;
+      showBotMsg(f[0]);
+      setOpts(f[1] || []);
+      if(key === 'confirm') awaitingName = true;
+    }
+
+    function showBotMsg(text) {
+      const msgs = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.className = 'msg bot';
+      div.innerHTML = text.replace(/\n/g,'<br/>') + '<div class="msg-time">agora</div>';
+      msgs.appendChild(div);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+
+    function showUserMsg(text) {
+      const msgs = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.className = 'msg user';
+      div.innerHTML = text + '<div class="msg-time">agora</div>';
+      msgs.appendChild(div);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+
+    function setOpts(opts) {
+      const el = document.getElementById('chatOptions');
+      el.innerHTML = opts.map(o => `<button class="chat-option" onclick="chatFlow('${o[1]}')">${o[0]}</button>`).join('');
+    }
+
+    function sendMsg() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if(!text) return;
+      input.value = '';
+      showUserMsg(text);
+
+      setTimeout(() => {
+        if(awaitingName) {
+          const confirmMsgs = {
+            es: `¡Reserva confirmada! 🎉\n\n¡Gracias, ${text.split(' ')[0]}!\nRecibirás una confirmación pronto.\n\n¡Nos vemos en Bici Rastro! 🚲`,
+            en: `Booking confirmed! 🎉\n\nThank you, ${text.split(' ')[0]}!\nYou'll receive a confirmation shortly.\n\nSee you at Bici Rastro! 🚲`
+          };
+          showBotMsg(confirmMsgs[currentLang]);
+          setOpts([]);
+          awaitingName = false;
+        } else {
+          const defaultMsgs = {
+            
+            es: "¡Entendido! 😊 Puedo ayudarte con alquiler de bici, tours o información sobre precios y horarios.",
+            en: "Got it! 😊 I can help you with bike rental, tours, or info about prices and hours."
+          };
+          showBotMsg(defaultMsgs[currentLang]);
+          const l = langs[currentLang];
+          setOpts(l.opts);
+        }
+      }, 600);
+    }
+  </script>
+</body>
+</html>
