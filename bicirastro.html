@@ -1001,19 +1001,19 @@
     </div>
     <div class="chat-messages" id="chatMessages">
       <div class="msg bot">
-        Olá! 👋 Bem-vindo à BiciRastro! Sou seu assistente de reservas.<br/><br/>
-        O que você gostaria de fazer hoje?
-        <div class="msg-time">agora</div>
+        ¡Hola! 👋 ¡Bienvenido a BiciRastro! Soy tu asistente de reservas.<br/><br/>
+        ¿Qué te gustaría hacer hoy?
+        <div class="msg-time">ahora</div>
       </div>
     </div>
     <div class="chat-options" id="chatOptions">
-      <button class="chat-option" onclick="chatFlow('aluguel')">🚲 Alugar bike</button>
+      <button class="chat-option" onclick="chatFlow('aluguel')">🚲 Alquilar bici</button>
       <button class="chat-option" onclick="chatFlow('tour')">🗺️ Reservar tour</button>
-      <button class="chat-option" onclick="chatFlow('precos')">💶 Ver preços</button>
-      <button class="chat-option" onclick="chatFlow('horarios')">⏰ Horários</button>
+      <button class="chat-option" onclick="chatFlow('precos')">💶 Ver precios</button>
+      <button class="chat-option" onclick="chatFlow('horarios')">⏰ Horarios</button>
     </div>
     <div class="chat-input-area">
-      <input class="chat-input" id="chatInput" placeholder="Escreva sua mensagem..." onkeydown="if(event.key==='Enter')sendMsg()"/>
+      <input class="chat-input" id="chatInput" placeholder="Escribe tu mensaje..." onkeydown="if(event.key==='Enter')sendMsg()"/>
       <button class="chat-send" onclick="sendMsg()">➤</button>
     </div>
   </div>
@@ -1251,6 +1251,10 @@
         }
       }, 600);
     }
+    document.addEventListener('DOMContentLoaded', () => {
+      updatePageContent();
+      resetChat();
+    });
   </script>
 </body>
 </html>
